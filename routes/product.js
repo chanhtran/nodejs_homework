@@ -1,40 +1,51 @@
-'use strict';
-var Sequelize = require('sequelize');
 var express = require('express');
-var product = require('../database/dbConnection');
+var router = express.Router();
+var productService = require('../service/productService');
+var p = new productService();
+router.get('/getAllProduct', function(req, res) {
+    p.getAllProduct(function(rows) {
+        res.send(JSON.stringify(rows));
+    });
+});
 
-function productService() {
-    this.getAllProduct = function(callback) {
-        product.findAll({
-            raw: true
-        }).then(callback);
-    };
-
-    this.addProduct = function(params) {
-        product.create({
-            name: params.name,
-            description: params.description,
-            price: params.price,
-            sku: params.sku
-        }).then(function() {
-
+router.get('/getProductByName/:name', function(req, res) {
+    var name = req.params.name;
+    p.getProductByName(
+        name,
+        function(rows) {
+            res.send(JSON.stringify(rows));
         });
-    };
+});
 
-    this.updateProduct = function(params) {
-        product.update({
+router.post('/addProduct', function(req, res) {
+    var p = new productService();
+    p.addProduct({
+        "name": req.body.name,
+        "description": req.body.description,
+        "price": req.body.price,
+        "sku": req.body.sku,
+    });
+    res.send("added!")
+});
 
-        });
-    };
+router.put('/updateProduct', function(req, res) {
+    var p = new productService();
+    p.updateProduct({
+        "id": req.body.id,
+        "name": req.body.name,
+        "description": req.body.description,
+        "price": req.body.price,
+        "sku": req.body.sku,
+    });
+    res.send("updated!");
+});
 
-    this.deleteProduct = function(params) {
-        product.destroy({
-            where: {
-                id: params.id
-            }
-        }).then(function() {
+router.delete('/deleteProduct', function(req, res) {
+    var p = new productService();
+    p.deleteProduct({
+        "id": req.body.id,
+    });
+    res.send("deleted!");
+});
 
-        });
-    };
-}
-module.exports = productService;
+module.exports = router

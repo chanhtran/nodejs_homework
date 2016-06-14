@@ -10,6 +10,16 @@ function productService() {
         }).then(callback);
     };
 
+    this.getProductByName = function(params, callback) {
+        product.findOne({
+            raw: true
+        }, {
+            where: {
+                name: params.name
+            }
+        }).then(callback);
+    };
+
     this.addProduct = function(params) {
         product.create({
             name: params.name,
@@ -17,7 +27,22 @@ function productService() {
             price: params.price,
             sku: params.sku
         }).then(function() {
-            
+
+        });
+    };
+
+    this.updateProduct = function(params) {
+        product.update({
+            name: params.name,
+            description: params.description,
+            price: params.price,
+            sku: params.sku
+        }, {
+            where: {
+                id: params.id
+            }
+        }).then(function() {
+
         });
     };
 
