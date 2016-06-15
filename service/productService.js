@@ -11,7 +11,7 @@ function productService() {
     };
 
     this.getProductByName = function(params, callback) {
-        product.findOne({
+        product.find({
             raw: true
         }, {
             where: {
