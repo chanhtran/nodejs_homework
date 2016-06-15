@@ -26,7 +26,7 @@ var product = sequelize.define('product_catalog', {
         type: Sequelize.STRING(200),
         allowNull: false
     },
-    description: Sequelize.STRING(2000),
+    description: Sequelize.TEXT,
     price: {
         type: Sequelize.DECIMAL(15, 2),
         allowNull: false

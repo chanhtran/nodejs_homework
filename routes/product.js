@@ -18,7 +18,6 @@ router.get('/getProductByName/:name', function(req, res) {
 });
 
 router.post('/addProduct', function(req, res) {
-    var p = new productService();
     p.addProduct({
         "name": req.body.name,
         "description": req.body.description,
@@ -29,7 +28,6 @@ router.post('/addProduct', function(req, res) {
 });
 
 router.put('/updateProduct', function(req, res) {
-    var p = new productService();
     p.updateProduct({
         "id": req.body.id,
         "name": req.body.name,
@@ -40,10 +38,9 @@ router.put('/updateProduct', function(req, res) {
     res.send("updated!");
 });
 
-router.delete('/deleteProduct', function(req, res) {
-    var p = new productService();
+router.delete('/deleteProduct/:id', function(req, res) {
     p.deleteProduct({
-        "id": req.body.id,
+        "id": req.params.id,
     });
     res.send("deleted!");
 });
