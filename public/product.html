@@ -24,8 +24,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="product in products">
-                    <th></th>
+                <tr ng-repeat="product in products track by $index">
+                    <th>{{$index + 1}}</th>
                     <th>{{product.name}}</th>
                     <th>{{product.description}}</th>
                     <th>{{product.price}}</th>
