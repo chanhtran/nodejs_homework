@@ -5,18 +5,15 @@ var product = require('../database/dbConnection');
 
 function productService() {
     this.getAllProduct = function(callback) {
-        product.findAll({
-            raw: true
-        }).then(callback);
+        product.findAll().then(callback);
     };
 
     this.getProductByName = function(params, callback) {
-        product.find({
-            raw: true
-        }, {
+        product.findAll({
             where: {
-                name: params.name
-            }
+                name: params
+            },
+
         }).then(callback);
     };
 

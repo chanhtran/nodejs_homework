@@ -10,6 +10,7 @@ router.get('/getAllProduct', function(req, res) {
 
 router.get('/getProductByName/:name', function(req, res) {
     var name = req.params.name;
+    console.log(name);
     p.getProductByName(
         name,
         function(rows) {
@@ -27,9 +28,9 @@ router.post('/addProduct', function(req, res) {
     res.send("added!")
 });
 
-router.put('/updateProduct', function(req, res) {
+router.put('/updateProduct/:id', function(req, res) {
     p.updateProduct({
-        "id": req.body.id,
+        "id": req.params.id,
         "name": req.body.name,
         "description": req.body.description,
         "price": req.body.price,
