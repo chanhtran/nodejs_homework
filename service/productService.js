@@ -24,7 +24,6 @@ function productService() {
             price: params.price,
             sku: params.sku
         }).then(function() {
-
         });
     };
 

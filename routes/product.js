@@ -10,7 +10,6 @@ router.get('/getAllProduct', function(req, res) {
 
 router.get('/getProductByName/:name', function(req, res) {
     var name = req.params.name;
-    console.log(name);
     p.getProductByName(
         name,
         function(rows) {
@@ -20,12 +19,12 @@ router.get('/getProductByName/:name', function(req, res) {
 
 router.post('/addProduct', function(req, res) {
     p.addProduct({
-        "name": req.body.name,
-        "description": req.body.description,
-        "price": req.body.price,
-        "sku": req.body.sku,
-    });
-    res.send("added!")
+            "name": req.body.name,
+            "description": req.body.description,
+            "price": req.body.price,
+            "sku": req.body.sku,
+        });
+        res.send(200);
 });
 
 router.put('/updateProduct/:id', function(req, res) {
@@ -36,14 +35,14 @@ router.put('/updateProduct/:id', function(req, res) {
         "price": req.body.price,
         "sku": req.body.sku,
     });
-    res.send("updated!");
+        res.send(200);
 });
 
 router.delete('/deleteProduct/:id', function(req, res) {
     p.deleteProduct({
         "id": req.params.id,
     });
-    res.send("deleted!");
+        res.send(200);
 });
 
 module.exports = router
